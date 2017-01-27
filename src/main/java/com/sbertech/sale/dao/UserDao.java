@@ -1,7 +1,9 @@
 package com.sbertech.sale.dao;
 
 import com.sbertech.sale.data.User;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +16,12 @@ public class UserDao implements UserDaoInterface{
 
     @Override
     public void addUser(User user){
-        sessionFactory.getCurrentSession().save(user);
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.persist(user);
+        session.flush();
+        tx.commit();
+        session.close();
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.List;
 @Entity
 @Table(name = "user_table")
 public class User extends BaseEntity {
-    @Column
+    @Column(name = "name")
     private String name;
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Item> items;

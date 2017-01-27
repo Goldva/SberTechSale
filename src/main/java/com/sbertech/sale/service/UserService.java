@@ -1,6 +1,5 @@
 package com.sbertech.sale.service;
 
-import com.sbertech.sale.dao.UserDao;
 import com.sbertech.sale.dao.UserDaoInterface;
 import com.sbertech.sale.data.User;
 import org.springframework.beans.factory.annotation.Autowired;

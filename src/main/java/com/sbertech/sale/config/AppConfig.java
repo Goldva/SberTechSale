@@ -1,4 +1,4 @@
-package com.sbertech.sale.config.core;
+package com.sbertech.sale.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
@@ -9,6 +9,8 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
 import java.util.Properties;
 
@@ -31,10 +33,10 @@ public class AppConfig {
     public BasicDataSource dataSource() {
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName("org.hsqldb.jdbcDriver");
-//        ds.setUrl("jdbc:hsqldb:file:mydb.db");
-        ds.setUrl("jdbc:hsqldb:mydb.db");
-        ds.setUsername("root");
-        ds.setPassword("root");
+        ds.setUrl("jdbc:hsqldb:file:D:/Java/SberTechSale/MyDb/mydb;shutdown=true");
+//        ds.setUrl("jdbc:hsqldb:mydb.db");
+        ds.setUsername("sa");
+        ds.setPassword("");
         return ds;
     }
 
@@ -46,7 +48,7 @@ public class AppConfig {
         prop.put("hibernate.pool_size", "1");
         prop.put("current_session_context_class", "thread");
         prop.put("hibernate.connection.charSet", "UTF-8");
-        prop.put("hibernate.hbm2ddl.auto", "create-drop");
+        prop.put("hibernate.hbm2ddl.auto", "create");
         return prop;
     }
 
@@ -55,4 +57,13 @@ public class AppConfig {
         return new HibernateTransactionManager(sessionFactory());
     }
 
+
+    @Bean
+    public InternalResourceViewResolver viewResolver(){
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setViewClass(JstlView.class);
+        viewResolver.setPrefix("/WEB-INF/views/");
+        viewResolver.setSuffix(".jsp");
+        return viewResolver;
+    }
 }
