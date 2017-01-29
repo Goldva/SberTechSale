@@ -5,22 +5,22 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
+import java.util.List;
 
 @Repository
 public class ItemDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void addItem(Item item){
-        sessionFactory.getCurrentSession().save(item);
+    public void addItem(Item item) {
+        sessionFactory.getCurrentSession().persist(item);
     }
 
     public Item getItemById(long itemId) {
         return (Item) sessionFactory.getCurrentSession().get(Item.class, itemId);
     }
 
-    public Collection getAllItems() {
+    public List getAllItems() {
         return sessionFactory.getCurrentSession().createCriteria(Item.class).list();
     }
 

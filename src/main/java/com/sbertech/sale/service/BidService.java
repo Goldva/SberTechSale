@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
+import java.util.List;
 
 @Service
 public class BidService {
@@ -14,7 +14,7 @@ public class BidService {
     private BidDao bidDao;
 
     @Transactional
-    public void addBid(Bid bid){
+    public void addBid(Bid bid) {
         bidDao.addBid(bid);
     }
 
@@ -24,7 +24,7 @@ public class BidService {
     }
 
     @Transactional
-    public Collection getAllBids() {
+    public List getAllBids() {
         return bidDao.getAllBids();
     }
 

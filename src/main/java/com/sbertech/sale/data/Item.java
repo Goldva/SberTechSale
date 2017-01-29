@@ -6,7 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Item extends BaseEntity{
+public class Item extends BaseEntity {
     @Column
     private String name;
     @Column
@@ -38,4 +38,6 @@ public class Item extends BaseEntity{
     public void setUser(User user) {
         this.user = user;
     }
+
+
 }

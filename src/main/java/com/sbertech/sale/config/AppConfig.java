@@ -16,11 +16,11 @@ import java.util.Properties;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({ "com.sbertech.sale.*" })
+@ComponentScan({"com.sbertech.sale.*"})
 @EnableTransactionManagement
 public class AppConfig {
     @Bean
-    public SessionFactory sessionFactory(){
+    public SessionFactory sessionFactory() {
         LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());
         builder
                 .scanPackages("com/sbertech/sale/data")
@@ -33,8 +33,7 @@ public class AppConfig {
     public BasicDataSource dataSource() {
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName("org.hsqldb.jdbcDriver");
-        ds.setUrl("jdbc:hsqldb:file:D:/Java/SberTechSale/MyDb/mydb;shutdown=true");
-//        ds.setUrl("jdbc:hsqldb:mydb.db");
+        ds.setUrl("jdbc:hsqldb:MyDb\\mydb.db");
         ds.setUsername("sa");
         ds.setPassword("");
         return ds;
@@ -59,7 +58,7 @@ public class AppConfig {
 
 
     @Bean
-    public InternalResourceViewResolver viewResolver(){
+    public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
         viewResolver.setPrefix("/WEB-INF/views/");

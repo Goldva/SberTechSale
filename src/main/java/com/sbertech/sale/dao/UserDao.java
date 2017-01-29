@@ -1,40 +1,29 @@
 package com.sbertech.sale.dao;
 
 import com.sbertech.sale.data.User;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
+import java.util.List;
 
 @Repository
-public class UserDao implements UserDaoInterface{
+public class UserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Override
-    public void addUser(User user){
-        Session session = sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
-        session.persist(user);
-        session.flush();
-        tx.commit();
-        session.close();
+    public void addUser(User user) {
+        sessionFactory.getCurrentSession().persist(user);
     }
 
-    @Override
     public User getUserById(long userId) {
         return (User) sessionFactory.getCurrentSession().get(User.class, userId);
     }
 
-    @Override
-    public Collection getAllUsers() {
+    public List getAllUsers() {
         return sessionFactory.getCurrentSession().createCriteria(User.class).list();
     }
 
-    @Override
     public void deleteUser(User user) {
         sessionFactory.getCurrentSession().delete(user);
     }
