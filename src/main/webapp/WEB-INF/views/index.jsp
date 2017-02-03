@@ -12,23 +12,23 @@
 <table>
     <tbody>
     <tr>
-        <td>
-            <form:form method="post" action="addUser" commandName="newUser">
-                <table>
-                    <tr>
-                        <td><form:label path="name">
-                            User name
-                        </form:label></td>
-                        <td><form:input path="name"/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <input type="submit" value="Add user"/>
-                        </td>
-                    </tr>
-                </table>
-            </form:form>
-        </td>
+        <%--<td>--%>
+            <%--<form:form method="post" action="addUser" commandName="newUser">--%>
+                <%--<table>--%>
+                    <%--<tr>--%>
+                        <%--<td><form:label path="name">--%>
+                            <%--User name--%>
+                        <%--</form:label></td>--%>
+                        <%--<td><form:input path="name"/></td>--%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                        <%--<td colspan="2">--%>
+                            <%--<input type="submit" value="Add user"/>--%>
+                        <%--</td>--%>
+                    <%--</tr>--%>
+                <%--</table>--%>
+            <%--</form:form>--%>
+        <%--</td>--%>
         <td>
             <form:form method="post" action="addItem" commandName="newItem">
                 <table>

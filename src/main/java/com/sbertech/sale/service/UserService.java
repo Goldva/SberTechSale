@@ -22,6 +22,10 @@ public class UserService {
     public User getUserById(long userId) {
         return userDao.getUserById(userId);
     }
+    @Transactional
+    public User getUserByLogin(String login) {
+        return userDao.getUserByLogin(login);
+    }
 
     @Transactional
     public List getAllUsers() {

@@ -1,7 +1,9 @@
 package com.sbertech.sale.dao;
 
 import com.sbertech.sale.data.User;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +20,13 @@ public class UserDao {
 
     public User getUserById(long userId) {
         return (User) sessionFactory.getCurrentSession().get(User.class, userId);
+    }
+
+    public User getUserByLogin(String login) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class)
+                .add(Restrictions.like("name", login));
+
+        return (User) sessionFactory.getCurrentSession().createCriteria(User.class, );
     }
 
     public List getAllUsers() {

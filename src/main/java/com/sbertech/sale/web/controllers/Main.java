@@ -20,6 +20,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "/index")
 public class Main {
     @Autowired
     private BidService bidService;
@@ -28,41 +29,41 @@ public class Main {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/")
-    public ModelAndView index(
-            @RequestParam(value = "error", required = false) String error,
-            @RequestParam(value = "messageError", required = false) String messageError) {
+//    @RequestMapping
+//    public ModelAndView index(
+//            @RequestParam(value = "error", required = false) String error,
+//            @RequestParam(value = "messageError", required = false) String messageError) {
+//
+//        ModelAndView model = new ModelAndView();
+//
+//        model.addObject("users", userService.getAllUsers());
+//        model.addObject("items", itemService.getAllItems());
+//        model.addObject("bids", bidService.getAllBids());
+//        model.addObject("newUser", new User());
+//        model.addObject("newItem", new Item());
+//        model.addObject("newBid", new Bid());
+//        model.addObject("error", error);
+//        model.addObject("messageError", messageError);
+//
+//        model.setViewName("index");
+//
+//        return model;
+//
+//    }
 
-        ModelAndView model = new ModelAndView();
-
-        model.addObject("users", userService.getAllUsers());
-        model.addObject("items", itemService.getAllItems());
-        model.addObject("bids", bidService.getAllBids());
-        model.addObject("newUser", new User());
-        model.addObject("newItem", new Item());
-        model.addObject("newBid", new Bid());
-        model.addObject("error", error);
-        model.addObject("messageError", messageError);
-
-        model.setViewName("index");
-
-        return model;
-
-    }
-
-    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public ModelAndView addUser(@ModelAttribute("newUser") User user) {
-        ModelAndView model = new ModelAndView(new RedirectView("/"));
-
-        try {
-            userService.addUser(user);
-        } catch (ConstraintViolationException e) {
-            model.addObject("error", "true");
-            model.addObject("messageError", "Пользователь с таким именем уже существует");
-            return model;
-        }
-        return model;
-    }
+//    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+//    public ModelAndView addUser(@ModelAttribute("newUser") User user) {
+//        ModelAndView model = new ModelAndView(new RedirectView("/"));
+//
+//        try {
+//            userService.addUser(user);
+//        } catch (ConstraintViolationException e) {
+//            model.addObject("error", "true");
+//            model.addObject("messageError", "Пользователь с таким именем уже существует");
+//            return model;
+//        }
+//        return model;
+//    }
 
     @RequestMapping(value = "/addItem", method = RequestMethod.POST)
     public ModelAndView addItem(@ModelAttribute("newItem") Item item) throws UnsupportedEncodingException {
