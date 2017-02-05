@@ -23,7 +23,7 @@ public class UserService {
         return userDao.getUserById(userId);
     }
     @Transactional
-    public User getUserByLogin(String login) {
+    public List getUserByLogin(String login) {
         return userDao.getUserByLogin(login);
     }
 

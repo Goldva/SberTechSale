@@ -22,11 +22,10 @@ public class UserDao {
         return (User) sessionFactory.getCurrentSession().get(User.class, userId);
     }
 
-    public User getUserByLogin(String login) {
+    public List getUserByLogin(String login) {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class)
                 .add(Restrictions.like("name", login));
-
-        return (User) sessionFactory.getCurrentSession().createCriteria(User.class, );
+        return criteria.list();
     }
 
     public List getAllUsers() {

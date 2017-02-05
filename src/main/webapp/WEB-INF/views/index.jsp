@@ -7,150 +7,139 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Главное меню</title>
+
+    <style type="text/css">
+        .item {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        table th {
+            background-color: lightblue;
+        }
+        .hover_Row {
+            background-color: yellow;
+        }
+        .clicked_Row {
+            background-color: lightgreen;
+        }
+    </style>
 </head>
 <body>
-<table>
-    <tbody>
-    <tr>
-        <%--<td>--%>
-            <%--<form:form method="post" action="addUser" commandName="newUser">--%>
-                <%--<table>--%>
-                    <%--<tr>--%>
-                        <%--<td><form:label path="name">--%>
-                            <%--User name--%>
-                        <%--</form:label></td>--%>
-                        <%--<td><form:input path="name"/></td>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                        <%--<td colspan="2">--%>
-                            <%--<input type="submit" value="Add user"/>--%>
-                        <%--</td>--%>
-                    <%--</tr>--%>
-                <%--</table>--%>
-            <%--</form:form>--%>
-        <%--</td>--%>
-        <td>
-            <form:form method="post" action="addItem" commandName="newItem">
-                <table>
-                    <tr>
-                        <td><form:label path="name">
-                            Item name
-                        </form:label></td>
-                        <td><form:input path="name"/></td>
-                    </tr>
-                    <tr>
-                        <td><form:label path="description">
-                            Description item
-                        </form:label></td>
-                        <td><form:input path="description"/></td>
-                    </tr>
-                    <tr>
-                        <td><form:label path="user.name">
-                            User name
-                        </form:label></td>
-                        <td><form:input path="user.name"/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <input type="submit" value="Add item"/>
-                        </td>
-                    </tr>
-                </table>
-            </form:form>
-        </td>
-        <td>
-            <form:form method="post" action="addBid" commandName="newBid">
-                <table>
-                    <tr>
-                        <td><form:label path="item.id">
-                            Item id
-                        </form:label></td>
-                        <td><form:input path="item.id"/></td>
-                    </tr>
-                    <tr>
-                        <td><form:label path="user.id">
-                            User id
-                        </form:label></td>
-                        <td><form:input path="user.id"/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <input type="submit" value="Add bid"/>
-                        </td>
-                    </tr>
-                </table>
-            </form:form>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <jsp:useBean id="users" class="java.util.ArrayList" scope="request"/>
-            <table>
-                <tbody>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                </tr>
-                <c:forEach items="${users}" var="user">
-                    <tr onclick="location.href='/index'">
-                        <td align="left">${user.id}</td>
-                        <td align="left">${user.name}</td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-        </td>
-        <td>
-            <jsp:useBean id="items" class="java.util.ArrayList" scope="request"/>
-            <table>
-                <tbody>
-                <tr>
-                    <th>id</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>UserName</th>
-                </tr>
-                <c:forEach items="${items}" var="item">
-                    <tr onclick="location.href='/login'">
-                        <td align="left">${item.id}</td>
-                        <td align="left">${item.name}</td>
-                        <td align="left">${item.description}</td>
-                        <td align="left">${item.user.name}</td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-        </td>
-        <td>
-            <jsp:useBean id="bids" class="java.util.ArrayList" scope="request"/>
-            <table>
-                <tbody>
-                <tr>
-                    <th>id</th>
-                    <th>UserName</th>
-                    <th>ItemName</th>
-                </tr>
-                <c:forEach items="${bids}" var="bid">
-                    <tr onclick="location.href='/login'">
-                        <td align="left">${bid.id}</td>
-                        <td align="left">${bid.user.name}</td>
-                        <td align="left">${bid.item.name}</td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-        </td>
-    </tbody>
-</table>
+<div>
+    <form:form method="post" action="index/addItem" commandName="newItem">
+        <table>
+            <tr>
+                <td><form:label path="name">
+                    Item name
+                </form:label></td>
+                <td><form:input path="name"/></td>
+            </tr>
+            <tr>
+                <td><form:label path="description">
+                    Description item
+                </form:label></td>
+                <td><form:input path="description"/></td>
+            </tr>
+            <tr>
+                <td><form:label path="user.name">
+                    User name
+                </form:label></td>
+                <td><form:input path="user.name"/></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Add item"/>
+                </td>
+            </tr>
+        </table>
+    </form:form>
+</div>
+<div>
+    <jsp:useBean id="items" class="java.util.ArrayList" scope="request"/>
+    <table class="item" id="items_table" lastclickedrowi="0">
+        <tbody>
+        <tr>
+            <th class="item">id</th>
+            <th class="item">Name</th>
+            <th class="item">Description</th>
+            <th class="item">UserName</th>
+        </tr>
+        <c:forEach items="${items}" var="item">
+            <tr>
+                <th class="item" align="left">${item.id}</th>
+                <td class="item" align="left">${item.name}</td>
+                <td class="item" align="left">${item.description}</td>
+                <td class="item" align="left">${item.user.name}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
 
-<jsp:useBean id="error" class="java.lang.String" scope="request"/>
-<c:if test="${error}">
-    <jsp:useBean id="messageError" class="java.lang.String" scope="request"/>
-    <script LANGUAGE="JavaScript">
-        alert("${messageError}");
-    </script>
-</c:if>
+<script type="text/javascript">
+//    Эта функция copy-paste
 
+    function highlight_Table_Rows(table_Id, hover_Class, click_Class, multiple) {
+        var table = document.getElementById(table_Id);
+        if (typeof multiple == 'undefined') multiple = true;
+
+        if (hover_Class) {
+            var hover_Class_Reg = new RegExp("\\b" + hover_Class + "\\b");
+            table.onmouseover = table.onmouseout = function (e) {
+                if (!e) e = window.event;
+                var elem = e.target || e.srcElement;
+                while (!elem.tagName || !elem.tagName.match(/td|th|table/i))
+                    elem = elem.parentNode;
+
+                if (elem.parentNode.tagName == 'TR' &&
+                        elem.parentNode.parentNode.tagName == 'TBODY') {
+                    var row = elem.parentNode;
+                    if (!row.getAttribute('clicked_Row'))
+                        row.className = e.type == "mouseover" ? row.className +
+                        " " + hover_Class : row.className.replace(hover_Class_Reg, " ");
+                }
+            };
+        }
+
+        if (click_Class) table.onclick = function (e) {
+            if (!e) e = window.event;
+            var elem = e.target || e.srcElement;
+            while (!elem.tagName || !elem.tagName.match(/td|th|table/i))
+                elem = elem.parentNode;
+
+            if (elem.parentNode.tagName == 'TR' &&
+                    elem.parentNode.parentNode.tagName == 'TBODY') {
+                var click_Class_Reg = new RegExp("\\b" + click_Class + "\\b");
+                var row = elem.parentNode;
+
+                if (row.getAttribute('clicked_Row')) {
+                    row.removeAttribute('clicked_Row');
+                    row.className = row.className.replace(click_Class_Reg, "");
+                    row.className += " " + hover_Class;
+                }
+                else {
+                    if (hover_Class) row.className = row.className.replace(hover_Class_Reg, "");
+                    row.className += " " + click_Class;
+                    row.setAttribute('clicked_Row', true);
+
+                    if (!multiple) {
+                        var lastRowI = table.getAttribute("last_Clicked_Row");
+                        if (lastRowI !== null && lastRowI !== '' && row.sectionRowIndex != lastRowI) {
+                            var lastRow = table.tBodies[0].rows[lastRowI];
+                            lastRow.className = lastRow.className.replace(click_Class_Reg, "");
+                            lastRow.removeAttribute('clicked_Row');
+                        }
+                    }
+                    table.setAttribute("last_Clicked_Row", row.sectionRowIndex);
+                }
+            }
+        };
+    }
+</script>
+
+<script type="text/javascript">
+    highlight_Table_Rows("items_table", "hover_Row", "clicked_Row", false);
+</script>
 
 </body>
 </html>

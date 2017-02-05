@@ -21,7 +21,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/index")
-public class Main {
+public class MainMenu {
     @Autowired
     private BidService bidService;
     @Autowired
@@ -29,27 +29,25 @@ public class Main {
     @Autowired
     private UserService userService;
 
-//    @RequestMapping
-//    public ModelAndView index(
-//            @RequestParam(value = "error", required = false) String error,
-//            @RequestParam(value = "messageError", required = false) String messageError) {
-//
-//        ModelAndView model = new ModelAndView();
-//
+    @RequestMapping
+    public ModelAndView index() {
+
+        ModelAndView model = new ModelAndView();
+
 //        model.addObject("users", userService.getAllUsers());
-//        model.addObject("items", itemService.getAllItems());
+        model.addObject("items", itemService.getAllItems());
 //        model.addObject("bids", bidService.getAllBids());
 //        model.addObject("newUser", new User());
-//        model.addObject("newItem", new Item());
-//        model.addObject("newBid", new Bid());
+        model.addObject("newItem", new Item());
+        model.addObject("newBid", new Bid());
 //        model.addObject("error", error);
 //        model.addObject("messageError", messageError);
-//
-//        model.setViewName("index");
-//
-//        return model;
-//
-//    }
+
+        model.setViewName("index");
+
+        return model;
+
+    }
 
 //    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
 //    public ModelAndView addUser(@ModelAttribute("newUser") User user) {

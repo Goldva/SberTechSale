@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <title></title>
+  <title></title>
 </head>
 <body>
 <form:form method="post" action="addUser" commandName="newUser">
@@ -16,6 +16,7 @@
     <tr>
       <td colspan="2">
         <input type="submit" value="Add user"/>
+        <input type="button" value="Back" ONCLICK="location.href='/'"/>
       </td>
     </tr>
   </table>
