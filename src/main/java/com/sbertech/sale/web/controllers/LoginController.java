@@ -1,10 +1,7 @@
 package com.sbertech.sale.web.controllers;
 
-import com.sbertech.sale.data.Bid;
-import com.sbertech.sale.data.Item;
 import com.sbertech.sale.data.User;
 import com.sbertech.sale.service.UserService;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +38,7 @@ public class LoginController {
     @RequestMapping(value = "/userCheck")
     public ModelAndView userCheck(@ModelAttribute("loginUser") User user){
         ModelAndView model = new ModelAndView(new RedirectView("/index"));
-        List users = userService.getUserByLogin(user.getName());
+        List users = userService.getUserByLogin(user.getUserName());
         if (users.size() == 0){
             model.addObject("messageError", "Пользователь с таким именем не существует");
             model.addObject("location", "/");
@@ -64,7 +61,8 @@ public class LoginController {
     public ModelAndView addUser(@ModelAttribute("newUser") User user) {
         ModelAndView model = new ModelAndView(new RedirectView("/"));
 
-        if (userService.getUserByLogin(user.getName()).size() == 0) {
+        List users = userService.getUserByLogin(user.getUserName());
+        if (users.size() == 0) {
             userService.addUser(user);
         }else {
             model.addObject("messageError", "Пользователь с таким именем уже существует");

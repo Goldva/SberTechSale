@@ -6,19 +6,19 @@ import java.util.List;
 @Entity
 @Table(name = "user_table")
 public class User extends BaseEntity {
-    @Column(name = "name", unique = true)
-    private String name;
+    @Column(name = "userName", unique = true)
+    private String userName;
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Item> items;
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
-    private Bid bid;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Bid> bids;
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public List<Item> getItems() {
@@ -29,12 +29,12 @@ public class User extends BaseEntity {
         this.items = items;
     }
 
-    public Bid getBid() {
-        return bid;
+    public List<Bid> getBids() {
+        return bids;
     }
 
-    public void setBid(Bid bid) {
-        this.bid = bid;
+    public void setBids(List<Bid> bids) {
+        this.bids = bids;
     }
 
     @Override
@@ -44,13 +44,13 @@ public class User extends BaseEntity {
 
         User user = (User) o;
 
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
+        if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return name != null ? name.hashCode() : 0;
+        return userName != null ? userName.hashCode() : 0;
     }
 }

@@ -8,10 +8,10 @@
 <form:form method="get" action="userCheck" commandName="loginUser">
   <table>
     <tr>
-      <td><form:label path="name">
+      <td><form:label path="userName">
         User name
       </form:label></td>
-      <td><form:input path="name"/></td>
+      <td><form:input path="userName"/></td>
     </tr>
     <tr>
       <td colspan="2">

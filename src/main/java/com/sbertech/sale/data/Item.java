@@ -8,19 +8,19 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Item extends BaseEntity {
     @Column
-    private String name;
+    private String itemName;
     @Column
     private String description;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    public String getName() {
-        return name;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
     public String getDescription() {

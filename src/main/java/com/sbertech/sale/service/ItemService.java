@@ -2,6 +2,7 @@ package com.sbertech.sale.service;
 
 import com.sbertech.sale.dao.ItemDao;
 import com.sbertech.sale.data.Item;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +27,11 @@ public class ItemService {
     @Transactional
     public List getAllItems() {
         return itemDao.getAllItems();
+    }
+
+    @Transactional
+    public List getAllItemsAreNotBought() {
+        return itemDao.getAllItemsAreNotBought();
     }
 
     @Transactional

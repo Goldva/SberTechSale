@@ -7,7 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Главное меню</title>
-
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <style type="text/css">
         .item {
             border: 1px solid black;
@@ -26,25 +26,27 @@
 </head>
 <body>
 <div>
+    <form:form method="get" action="/personalArea">
+        <input type="submit" value="Личный кабинет"/>
+    </form:form>
+    <form:form method="get" action="/index/exit">
+        <input type="submit" value="Выход"/>
+    </form:form>
+</div>
+<div>
     <form:form method="post" action="index/addItem" commandName="newItem">
         <table>
             <tr>
-                <td><form:label path="name">
+                <td><form:label path="itemName">
                     Item name
                 </form:label></td>
-                <td><form:input path="name"/></td>
+                <td><form:input path="itemName"/></td>
             </tr>
             <tr>
                 <td><form:label path="description">
                     Description item
                 </form:label></td>
                 <td><form:input path="description"/></td>
-            </tr>
-            <tr>
-                <td><form:label path="user.name">
-                    User name
-                </form:label></td>
-                <td><form:input path="user.name"/></td>
             </tr>
             <tr>
                 <td colspan="2">
@@ -56,7 +58,7 @@
 </div>
 <div>
     <jsp:useBean id="items" class="java.util.ArrayList" scope="request"/>
-    <table class="item" id="items_table" lastclickedrowi="0">
+    <table class="item" id="items_table">
         <tbody>
         <tr>
             <th class="item">id</th>
@@ -67,9 +69,9 @@
         <c:forEach items="${items}" var="item">
             <tr>
                 <th class="item" align="left">${item.id}</th>
-                <td class="item" align="left">${item.name}</td>
+                <td class="item" align="left">${item.itemName}</td>
                 <td class="item" align="left">${item.description}</td>
-                <td class="item" align="left">${item.user.name}</td>
+                <td class="item" align="left">${item.user.userName}</td>
             </tr>
         </c:forEach>
         </tbody>
@@ -133,7 +135,21 @@
                     table.setAttribute("last_Clicked_Row", row.sectionRowIndex);
                 }
             }
+            buyItem(elem.parentNode);
         };
+    }
+</script>
+
+<script type="text/javascript">
+    function buyItem(row) {
+        var r = confirm("Желаете приобрести данный товар?");
+        if (r == true) {
+            var id = row.children.item(0).innerText;
+            $.ajax({
+                url: 'index/' + id,
+                method: 'PUT'
+            });
+        }
     }
 </script>
 

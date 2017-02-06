@@ -2,14 +2,15 @@ package com.sbertech.sale.data;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Bid extends BaseEntity {
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
 

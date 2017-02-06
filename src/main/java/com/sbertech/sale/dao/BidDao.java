@@ -1,7 +1,10 @@
 package com.sbertech.sale.dao;
 
 import com.sbertech.sale.data.Bid;
+import com.sbertech.sale.data.User;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +25,12 @@ public class BidDao {
 
     public List getAllBids() {
         return sessionFactory.getCurrentSession().createCriteria(Bid.class).list();
+    }
+
+    public List getAllBidsForUser(User user) {
+        return sessionFactory.getCurrentSession().createCriteria(Bid.class)
+                .add(Restrictions.eq("user", user))
+                .list();
     }
 
     public void deleteBid(Bid bid) {

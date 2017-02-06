@@ -24,7 +24,7 @@ public class UserDao {
 
     public List getUserByLogin(String login) {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class)
-                .add(Restrictions.like("name", login));
+                .add(Restrictions.like("userName", login));
         return criteria.list();
     }
 
