@@ -1,15 +1,16 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>--%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Главное меню</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <%--<link href="css/style.css" rel="stylesheet" type="text/css">--%>
     <style type="text/css">
-        .item {
+        table, th, td {
             border: 1px solid black;
             border-collapse: collapse;
         }
@@ -27,51 +28,49 @@
 <body>
 <div>
     <form:form method="get" action="/personalArea">
-        <input type="submit" value="Личный кабинет"/>
+        <input type="submit" value="<spring:message code="lable.personalArea"/>"/>
     </form:form>
     <form:form method="get" action="/index/exit">
-        <input type="submit" value="Выход"/>
+        <input type="submit" value="<spring:message code="lable.exit"/>"/>
     </form:form>
 </div>
 <div>
-    <form:form method="post" action="index/addItem" commandName="newItem">
-        <table>
-            <tr>
-                <td><form:label path="itemName">
-                    Item name
-                </form:label></td>
-                <td><form:input path="itemName"/></td>
-            </tr>
-            <tr>
-                <td><form:label path="description">
-                    Description item
-                </form:label></td>
-                <td><form:input path="description"/></td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <input type="submit" value="Add item"/>
-                </td>
-            </tr>
-        </table>
+    <form:form method="post" action="index/" commandName="newItem">
+        <div>
+            <div>
+                <form:label path="itemName">
+                    <spring:message code="lable.itemName"/>
+                </form:label>
+                <form:input path="itemName"/>
+            </div>
+            <div>
+                <form:label path="description">
+                    <spring:message code="lable.description"/>
+                </form:label>
+                <form:input path="description"/>
+            </div>
+            <div>
+                <input type="submit" value="<spring:message code="lable.add"/>"/>
+            </div>
+        </div>
     </form:form>
 </div>
 <div>
     <jsp:useBean id="items" class="java.util.ArrayList" scope="request"/>
-    <table class="item" id="items_table">
+    <table id="items_table">
         <tbody>
         <tr>
-            <th class="item">id</th>
-            <th class="item">Name</th>
-            <th class="item">Description</th>
-            <th class="item">UserName</th>
+            <th><spring:message code="lable.id"/></th>
+            <th><spring:message code="lable.itemName"/></th>
+            <th><spring:message code="lable.description"/></th>
+            <th><spring:message code="lable.userName"/></th>
         </tr>
         <c:forEach items="${items}" var="item">
             <tr>
-                <th class="item" align="left">${item.id}</th>
-                <td class="item" align="left">${item.itemName}</td>
-                <td class="item" align="left">${item.description}</td>
-                <td class="item" align="left">${item.user.userName}</td>
+                <th align="left">${item.id}</th>
+                <td align="left">${item.itemName}</td>
+                <td align="left">${item.description}</td>
+                <td align="left">${item.user.userName}</td>
             </tr>
         </c:forEach>
         </tbody>
@@ -79,7 +78,7 @@
 </div>
 
 <script type="text/javascript">
-//    Эта функция copy-paste
+    //    Эта функция copy-paste
 
     function highlight_Table_Rows(table_Id, hover_Class, click_Class, multiple) {
         var table = document.getElementById(table_Id);
@@ -147,7 +146,16 @@
             var id = row.children.item(0).innerText;
             $.ajax({
                 url: 'index/' + id,
-                method: 'PUT'
+                method: 'PUT',
+                success: function(){
+                    alert('Товар куплен.');
+                    window.location = "/index"
+                },
+                error : function(){
+                    alert('Товар уже куплен.');
+                    window.location = "/index"
+                }
+
             });
         }
     }

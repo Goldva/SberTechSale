@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
     <title></title>
@@ -9,14 +10,14 @@
   <table>
     <tr>
       <td><form:label path="userName">
-        User name
+        <spring:message code="lable.userName"/>
       </form:label></td>
       <td><form:input path="userName"/></td>
     </tr>
     <tr>
       <td colspan="2">
-        <input type="submit" value="Login"/>
-        <input type="button" value="Registration" ONCLICK="location.href='/registration'"/>
+        <input type="submit" value="<spring:message code="lable.login"/>"/>
+        <input type="button" value="<spring:message code="lable.registration"/>" ONCLICK="location.href='/registration'"/>
       </td>
     </tr>
   </table>

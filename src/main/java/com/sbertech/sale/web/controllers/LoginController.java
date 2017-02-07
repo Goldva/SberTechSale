@@ -4,7 +4,10 @@ import com.sbertech.sale.data.User;
 import com.sbertech.sale.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -22,7 +25,7 @@ public class LoginController {
         return new User();
     }
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.GET)
     public ModelAndView loginMenu(@ModelAttribute("loginUser") User user) {
         ModelAndView model = new ModelAndView();
         if (user.getId() == null) {
@@ -36,16 +39,16 @@ public class LoginController {
 
 
     @RequestMapping(value = "/userCheck")
-    public ModelAndView userCheck(@ModelAttribute("loginUser") User user){
+    public ModelAndView userCheck(@ModelAttribute("loginUser") User user) {
         ModelAndView model = new ModelAndView(new RedirectView("/index"));
         List users = userService.getUserByLogin(user.getUserName());
-        if (users.size() == 0){
+        if (users.size() == 0) {
             model.addObject("messageError", "Пользователь с таким именем не существует");
             model.addObject("location", "/");
             model.setViewName("error");
-        }else {
-            model.addObject("loginUser", users.get(0));
+            return model;
         }
+        model.addObject("loginUser", users.get(0));
         return model;
     }
 
@@ -57,18 +60,18 @@ public class LoginController {
         return model;
     }
 
-    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ModelAndView addUser(@ModelAttribute("newUser") User user) {
-        ModelAndView model = new ModelAndView(new RedirectView("/"));
-
+        ModelAndView model = new ModelAndView();
         List users = userService.getUserByLogin(user.getUserName());
-        if (users.size() == 0) {
-            userService.addUser(user);
-        }else {
+        if (users.size() != 0) {
             model.addObject("messageError", "Пользователь с таким именем уже существует");
             model.addObject("location", "/registration");
-            model.setViewName("error");
+            model.setView(new RedirectView("/error"));
+            return model;
         }
+        userService.addUser(user);
+        model.setView(new RedirectView("/"));
         return model;
     }
 }

@@ -1,9 +1,6 @@
 package com.sbertech.sale.data;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Bid extends BaseEntity {

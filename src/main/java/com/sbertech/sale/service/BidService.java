@@ -2,8 +2,8 @@ package com.sbertech.sale.service;
 
 import com.sbertech.sale.dao.BidDao;
 import com.sbertech.sale.data.Bid;
+import com.sbertech.sale.data.Item;
 import com.sbertech.sale.data.User;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,8 +31,13 @@ public class BidService {
     }
 
     @Transactional
-    public List getAllBidsForUser(User userId) {
-        return bidDao.getAllBidsForUser(userId);
+    public List getBidByUser(User userId) {
+        return bidDao.getBidByUser(userId);
+    }
+
+    @Transactional
+    public List getBidByItem(Item item) {
+        return bidDao.getBidByItem(item);
     }
 
     @Transactional

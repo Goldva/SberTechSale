@@ -28,14 +28,10 @@ public class ItemDao {
         return sessionFactory.getCurrentSession().createCriteria(Item.class).list();
     }
 
-//    public List getAllItemsAreNotBought() {
-//        List<Item> items = (List<Item>) sessionFactory.getCurrentSession().createQuery("SELECT * From item Where id NOT IN(SELECT id From bid)");
-//        return items;
-////        return sessionFactory.getCurrentSession().createCriteria(Item.class)
-////                .add(Restrictions.not(Restrictions.in(Restrictions.)))
-////                .add(Restrictions.sqlRestriction("SELECT * From item Where id NOT IN(SELECT id From bid)"))
-////                .list();
-//    }
+    public List getAllItemsAreNotBought() {
+        return sessionFactory.getCurrentSession()
+                .createQuery("From Item Where id NOT IN(SELECT id From Bid)").list();
+    }
 
     public void deleteItem(Item item) {
         sessionFactory.getCurrentSession().delete(item);

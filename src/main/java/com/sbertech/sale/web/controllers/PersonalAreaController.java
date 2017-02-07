@@ -19,8 +19,8 @@ public class PersonalAreaController {
     @RequestMapping()
     public ModelAndView personalArea(@ModelAttribute("loginUser") User user){
         ModelAndView model = new ModelAndView();
-        model.addObject("bids", bidService.getAllBidsForUser(user));
-        model.setViewName("personalArea");
+        model.addObject("bids", bidService.getBidByUser(user));
+        model.setViewName("PersonalArea");
         return model;
 
     }

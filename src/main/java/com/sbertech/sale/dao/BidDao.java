@@ -1,6 +1,7 @@
 package com.sbertech.sale.dao;
 
 import com.sbertech.sale.data.Bid;
+import com.sbertech.sale.data.Item;
 import com.sbertech.sale.data.User;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -27,9 +28,15 @@ public class BidDao {
         return sessionFactory.getCurrentSession().createCriteria(Bid.class).list();
     }
 
-    public List getAllBidsForUser(User user) {
+    public List getBidByUser(User user) {
         return sessionFactory.getCurrentSession().createCriteria(Bid.class)
                 .add(Restrictions.eq("user", user))
+                .list();
+    }
+
+    public List getBidByItem(Item item) {
+        return sessionFactory.getCurrentSession().createCriteria(Bid.class)
+                .add(Restrictions.eq("item", item))
                 .list();
     }
 
