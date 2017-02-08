@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SberTechSale:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="sale-1.0.war">
+      <element id="artifact" artifact-name="SberTechSale:war exploded" />
+    </root>
+  </artifact>
+</component>

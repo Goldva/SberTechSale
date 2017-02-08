@@ -1,6 +1,8 @@
 package com.sbertech.sale.web.controllers;
 
 import com.sbertech.sale.data.User;
+import com.sbertech.sale.exception.ConflictException;
+import com.sbertech.sale.exception.NotFoundExeption;
 import com.sbertech.sale.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +17,7 @@ import java.util.List;
 
 @Controller
 @SessionAttributes("loginUser")
-@RequestMapping(value = "/")
+@RequestMapping(value = "/sale")
 public class LoginController {
     @Autowired
     private UserService userService;
@@ -32,21 +34,17 @@ public class LoginController {
             model.addObject("loginUser", user);
             model.setViewName("loginMenu");
         }else {
-            model.setView(new RedirectView("/index"));
+            model.setView(new RedirectView("/sale/index"));
         }
         return model;
     }
 
-
     @RequestMapping(value = "/userCheck")
     public ModelAndView userCheck(@ModelAttribute("loginUser") User user) {
-        ModelAndView model = new ModelAndView(new RedirectView("/index"));
+        ModelAndView model = new ModelAndView(new RedirectView("/sale/index"));
         List users = userService.getUserByLogin(user.getUserName());
         if (users.size() == 0) {
-            model.addObject("messageError", "Пользователь с таким именем не существует");
-            model.addObject("location", "/");
-            model.setViewName("error");
-            return model;
+            throw new NotFoundExeption();
         }
         model.addObject("loginUser", users.get(0));
         return model;
@@ -54,7 +52,7 @@ public class LoginController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView registrationMenu() {
-        ModelAndView model = new ModelAndView(new RedirectView("/"));
+        ModelAndView model = new ModelAndView(new RedirectView("/sale/"));
         model.addObject("newUser", new User());
         model.setViewName("registrationMenu");
         return model;
@@ -65,13 +63,10 @@ public class LoginController {
         ModelAndView model = new ModelAndView();
         List users = userService.getUserByLogin(user.getUserName());
         if (users.size() != 0) {
-            model.addObject("messageError", "Пользователь с таким именем уже существует");
-            model.addObject("location", "/registration");
-            model.setView(new RedirectView("/error"));
-            return model;
+            throw new ConflictException();
         }
         userService.addUser(user);
-        model.setView(new RedirectView("/"));
+        model.setView(new RedirectView("/sale/"));
         return model;
     }
 }

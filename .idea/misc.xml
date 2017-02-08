@@ -28,6 +28,9 @@
     <option name="priority" value="Medium" />
     <option name="excludeFilter" value="" />
   </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$" />
+  </component>
   <component name="IdProvider" IDEtalkID="B834E397B38D712961ADED3C06403EF6" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">

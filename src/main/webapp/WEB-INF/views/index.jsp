@@ -14,43 +14,51 @@
             border: 1px solid black;
             border-collapse: collapse;
         }
+
         table th {
             background-color: lightblue;
         }
+
         .hover_Row {
             background-color: yellow;
         }
+
         .clicked_Row {
             background-color: lightgreen;
         }
     </style>
 </head>
 <body>
+<span style="float: right">
+    <a href="?lang=en">en</a>
+    <a href="?lang=ru">ru</a>
+</span>
+
 <div>
-    <form:form method="get" action="/personalArea">
-        <input type="submit" value="<spring:message code="lable.personalArea"/>"/>
+    <form:form method="get" action="/sale/personalArea">
+        <input type="submit" value="<spring:message code="button.personalArea"/>"/>
     </form:form>
-    <form:form method="get" action="/index/exit">
-        <input type="submit" value="<spring:message code="lable.exit"/>"/>
+    <form:form method="get" action="/sale/index/exit">
+        <input type="submit" value="<spring:message code="button.exit"/>"/>
     </form:form>
 </div>
 <div>
-    <form:form method="post" action="index/" commandName="newItem">
+    <form:form method="post" action="/sale/index/" commandName="newItem">
         <div>
             <div>
                 <form:label path="itemName">
-                    <spring:message code="lable.itemName"/>
+                    <spring:message code="label.itemName"/>
                 </form:label>
                 <form:input path="itemName"/>
             </div>
             <div>
                 <form:label path="description">
-                    <spring:message code="lable.description"/>
+                    <spring:message code="label.description"/>
                 </form:label>
                 <form:input path="description"/>
             </div>
             <div>
-                <input type="submit" value="<spring:message code="lable.add"/>"/>
+                <input type="submit" value="<spring:message code="button.add"/>"/>
             </div>
         </div>
     </form:form>
@@ -60,10 +68,10 @@
     <table id="items_table">
         <tbody>
         <tr>
-            <th><spring:message code="lable.id"/></th>
-            <th><spring:message code="lable.itemName"/></th>
-            <th><spring:message code="lable.description"/></th>
-            <th><spring:message code="lable.userName"/></th>
+            <th><spring:message code="label.id"/></th>
+            <th><spring:message code="label.itemName"/></th>
+            <th><spring:message code="label.description"/></th>
+            <th><spring:message code="label.userName"/></th>
         </tr>
         <c:forEach items="${items}" var="item">
             <tr>
@@ -141,19 +149,19 @@
 
 <script type="text/javascript">
     function buyItem(row) {
-        var r = confirm("Желаете приобрести данный товар?");
+        var r = confirm("<spring:message code="message.doYouWantToBuyThisProduct"/>");
         if (r == true) {
             var id = row.children.item(0).innerText;
             $.ajax({
-                url: 'index/' + id,
+                url: '/sale/index/' + id,
                 method: 'PUT',
-                success: function(){
-                    alert('Товар куплен.');
-                    window.location = "/index"
+                success: function () {
+                    alert('<spring:message code="error.thankYouForYourPurchase"/>');
+                    window.location = "/sale/index"
                 },
-                error : function(){
-                    alert('Товар уже куплен.');
-                    window.location = "/index"
+                error: function () {
+                    alert('<spring:message code="error.thisProductDoesNotHaveInStock"/>');
+                    window.location = "/sale/index"
                 }
 
             });

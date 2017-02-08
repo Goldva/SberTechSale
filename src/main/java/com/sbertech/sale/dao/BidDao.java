@@ -3,7 +3,6 @@ package com.sbertech.sale.dao;
 import com.sbertech.sale.data.Bid;
 import com.sbertech.sale.data.Item;
 import com.sbertech.sale.data.User;
-import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
