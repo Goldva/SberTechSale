@@ -17,7 +17,7 @@ import java.util.List;
 
 @Controller
 @SessionAttributes("loginUser")
-@RequestMapping(value = "/sale")
+@RequestMapping(value = "/")
 public class LoginController {
     @Autowired
     private UserService userService;
@@ -34,14 +34,14 @@ public class LoginController {
             model.addObject("loginUser", user);
             model.setViewName("loginMenu");
         }else {
-            model.setView(new RedirectView("/sale/index"));
+            model.setView(new RedirectView("/index"));
         }
         return model;
     }
 
     @RequestMapping(value = "/userCheck")
     public ModelAndView userCheck(@ModelAttribute("loginUser") User user) {
-        ModelAndView model = new ModelAndView(new RedirectView("/sale/index"));
+        ModelAndView model = new ModelAndView(new RedirectView("/index"));
         List users = userService.getUserByLogin(user.getUserName());
         if (users.size() == 0) {
             throw new NotFoundExeption();
@@ -52,7 +52,7 @@ public class LoginController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView registrationMenu() {
-        ModelAndView model = new ModelAndView(new RedirectView("/sale/"));
+        ModelAndView model = new ModelAndView(new RedirectView("/"));
         model.addObject("newUser", new User());
         model.setViewName("registrationMenu");
         return model;
@@ -66,7 +66,7 @@ public class LoginController {
             throw new ConflictException();
         }
         userService.addUser(user);
-        model.setView(new RedirectView("/sale/"));
+        model.setView(new RedirectView("/"));
         return model;
     }
 }

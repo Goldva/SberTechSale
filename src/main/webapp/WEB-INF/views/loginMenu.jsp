@@ -25,7 +25,7 @@
                 <td colspan="2">
                     <input type="submit" value="<spring:message code="button.login"/>"/>
                     <input type="button" value="<spring:message code="button.registration"/>"
-                           ONCLICK="location.href='/sale/registration'"/>
+                           ONCLICK="location.href='/registration'"/>
                 </td>
             </tr>
         </table>
@@ -37,10 +37,10 @@
         var msg = $('#loginForm').serialize();
         $.ajax({
             method: 'GET',
-            url: "/sale/userCheck",
+            url: "/userCheck",
             data: msg
         }).done(function () {
-            window.location = "/sale/index"
+            window.location = "/index"
         }).fail(function () {
             alert('<spring:message code="error.userDoesNotExist"/>');
         });

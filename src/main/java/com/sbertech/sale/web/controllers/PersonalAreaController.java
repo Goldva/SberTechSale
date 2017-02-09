@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @SessionAttributes("loginUser")
-@RequestMapping(value = "/sale/personalArea")
+@RequestMapping(value = "/personalArea")
 public class PersonalAreaController {
     @Autowired
     private BidService bidService;

@@ -15,7 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @SessionAttributes("loginUser")
-@RequestMapping(value = "/sale/index")
+@RequestMapping(value = "/index")
 public class MainMenu {
     @Autowired
     private BidService bidService;
@@ -36,7 +36,7 @@ public class MainMenu {
     public ModelAndView addItem(
             @ModelAttribute("newItem") Item item,
             @ModelAttribute("loginUser") User user) {
-        ModelAndView model = new ModelAndView(new RedirectView("/sale/index"));
+        ModelAndView model = new ModelAndView(new RedirectView("/index"));
         item.setUser(user);
         itemService.addItem(item);
         return model;
@@ -59,7 +59,7 @@ public class MainMenu {
 
     @RequestMapping(value = "/exit", method = RequestMethod.GET)
     public ModelAndView exit(){
-        ModelAndView model = new ModelAndView(new RedirectView("/sale/"));
+        ModelAndView model = new ModelAndView(new RedirectView("/"));
         model.addObject("loginUser", new User());
         return model;
     }

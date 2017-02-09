@@ -35,15 +35,15 @@
 </span>
 
 <div>
-    <form:form method="get" action="/sale/personalArea">
+    <form:form method="get" action="/personalArea">
         <input type="submit" value="<spring:message code="button.personalArea"/>"/>
     </form:form>
-    <form:form method="get" action="/sale/index/exit">
+    <form:form method="get" action="/index/exit">
         <input type="submit" value="<spring:message code="button.exit"/>"/>
     </form:form>
 </div>
 <div>
-    <form:form method="post" action="/sale/index/" commandName="newItem">
+    <form:form method="post" action="/index/" commandName="newItem">
         <div>
             <div>
                 <form:label path="itemName">
@@ -153,15 +153,15 @@
         if (r == true) {
             var id = row.children.item(0).innerText;
             $.ajax({
-                url: '/sale/index/' + id,
+                url: '/index/' + id,
                 method: 'PUT',
                 success: function () {
                     alert('<spring:message code="error.thankYouForYourPurchase"/>');
-                    window.location = "/sale/index"
+                    window.location = "/index"
                 },
                 error: function () {
                     alert('<spring:message code="error.thisProductDoesNotHaveInStock"/>');
-                    window.location = "/sale/index"
+                    window.location = "/index"
                 }
 
             });

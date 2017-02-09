@@ -23,7 +23,7 @@
         <tr>
             <td colspan="2">
                 <input type="submit" value="<spring:message code="button.add"/>"/>
-                <input type="button" value="<spring:message code="button.back"/>" ONCLICK="location.href='/sale/'"/>
+                <input type="button" value="<spring:message code="button.back"/>" ONCLICK="location.href='/'"/>
             </td>
         </tr>
     </table>
@@ -34,10 +34,10 @@
         var msg = $('#regFrom').serialize();
         $.ajax({
             method: 'POST',
-            url: "/sale/registration",
+            url: "/registration",
             data: msg
         }).done(function () {
-            window.location = "/sale/"
+            window.location = "/"
         }).fail(function () {
             alert('<spring:message code="error.userExists"/>');
         });
