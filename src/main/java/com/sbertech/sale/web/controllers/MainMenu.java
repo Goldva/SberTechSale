@@ -32,7 +32,7 @@ public class MainMenu {
         return model;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ModelAndView addItem(
             @ModelAttribute("newItem") Item item,
             @ModelAttribute("loginUser") User user) {

@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <%--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">--%>
     <title>Главное меню</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <%--<link href="css/style.css" rel="stylesheet" type="text/css">--%>
@@ -43,25 +43,25 @@
     </form:form>
 </div>
 <div>
-    <form:form method="post" action="/index/" commandName="newItem">
+    <form id="itemAddForm" method="post" action="javascript:void(null);" onsubmit="addItem()">
         <div>
             <div>
-                <form:label path="itemName">
+                <label for="itemName">
                     <spring:message code="label.itemName"/>
-                </form:label>
-                <form:input path="itemName"/>
+                </label>
+                <input id="itemName" name="itemName" value="" type="text"/>
             </div>
             <div>
-                <form:label path="description">
+                <label for="description">
                     <spring:message code="label.description"/>
-                </form:label>
-                <form:input path="description"/>
+                </label>
+                <input id="description" name="description" value="" type="text"/>
             </div>
             <div>
                 <input type="submit" value="<spring:message code="button.add"/>"/>
             </div>
         </div>
-    </form:form>
+    </form>
 </div>
 <div>
     <jsp:useBean id="items" class="java.util.ArrayList" scope="request"/>
@@ -144,6 +144,19 @@
             }
             buyItem(elem.parentNode);
         };
+    }
+</script>
+
+<script type="text/javascript">
+    function addItem() {
+        var item = $('#itemAddForm').serialize();
+        $.ajax({
+            method: 'POST',
+            url: "/index",
+            data: item
+        }).done(function () {
+            window.location = "/index"
+        });
     }
 </script>
 
