@@ -41,7 +41,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     public BasicDataSource dataSource() {
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName("org.hsqldb.jdbcDriver");
-        ds.setUrl("jdbc:hsqldb:D:\\Java\\SberTechSale\\MyDb\\mydb.db");
+        ds.setUrl("jdbc:hsqldb:MyDb\\mydb.db");
         ds.setUsername("sa");
         ds.setPassword("");
         return ds;
